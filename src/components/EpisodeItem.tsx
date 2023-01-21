@@ -1,6 +1,9 @@
+'use client';
+
 import Link from 'next/link';
 import { useMemo } from 'react';
 
+import { useAudioPlayer } from '@/contexts/AudioPlayerCtx';
 import { IEpisode } from '@/types/episode';
 
 import { DateTime } from './DateTime';
@@ -12,22 +15,9 @@ interface IProps {
 }
 
 export default function EpisodeItem({ episode }: IProps) {
-	let date = new Date(episode.publishedAt);
+	let audioPlayerData = useMemo(() => episode, [episode]);
 
-	let audioPlayerData = useMemo(
-		() => ({
-			title: episode.title,
-			// TSK: This is where we'll add the audio data
-			// audio: {
-			// 	src: episode.audio.src,
-			// 	type: episode.audio.type,
-			// },
-			link: `/${episode.id}`,
-		}),
-		[episode]
-	);
-
-	// let player = useAudioPlayer(audioPlayerData);
+	const player = useAudioPlayer(audioPlayerData);
 
 	return (
 		<article aria-labelledby={`episode-${episode.id}-title`} className="py-10 sm:py-12">
@@ -37,18 +27,21 @@ export default function EpisodeItem({ episode }: IProps) {
 						<Link href={`/${episode.id}`}>{episode.title}</Link>
 					</h2>
 
-					<DateTime date={date} className="order-first font-mono text-sm leading-7 text-slate-500" />
+					<DateTime
+						date={new Date(episode.publishedAt)}
+						className="order-first font-mono text-sm leading-7 text-slate-500"
+					/>
 
 					<p className="mt-1 text-base leading-7 text-slate-700">{episode.description}</p>
 
 					<div className="mt-4 flex items-center gap-4">
 						<button
 							type="button"
-							// onClick={() => player.toggle()}
+							onClick={() => player.toggle()}
 							className="flex items-center text-sm font-bold leading-6 text-emerald-500 hover:text-emerald-700 active:text-emerald-900"
-							// aria-label={`${player.playing ? 'Pause' : 'Play'} episode ${episode.title}`}
+							aria-label={`${player.playing ? 'Pause' : 'Play'} episode ${episode.title}`}
 						>
-							{/* <PlayPauseIcon playing={player.playing} className="h-2.5 w-2.5 fill-current" /> */}
+							<PlayPauseIcon isPlaying={player.playing} className="h-2.5 w-2.5 fill-current" />
 
 							<span className="ml-3" aria-hidden="true">
 								Listen

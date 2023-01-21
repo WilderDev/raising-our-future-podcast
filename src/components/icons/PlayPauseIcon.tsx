@@ -1,5 +1,6 @@
 interface IProps {
 	isPlaying: boolean;
+	[key: string]: any;
 }
 
 export default function PlayPauseIcon({ isPlaying, ...props }: IProps) {

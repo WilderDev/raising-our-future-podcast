@@ -17,10 +17,10 @@ export default function About({ ...props }) {
 			</h2>
 
 			<p className={cn('mt-2 space-y-4 text-base leading-7 text-slate-700', !isExpanded && 'lg:line-clamp-3')}>
-				<div className="block">
+				<span className="block">
 					Welcome to &quot;Raising Our Future,&quot; a podcast hosted by two parents who are passionate about
 					homeschooling, raising children, and life.
-				</div>
+				</span>
 				<span className="block">
 					Our goal is to provide valuable insights and inspiration to parents who are navigating the
 					challenges of homeschooling and raising children in today&apos;s world.
