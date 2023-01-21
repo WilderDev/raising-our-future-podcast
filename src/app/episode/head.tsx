@@ -1,7 +1,9 @@
-export default function Head() {
+export default function EpisodeHead() {
+	const episodeTitle = 'Episode 1: The Beginning';
+
 	return (
 		<>
-			<title>Raising Our Future - Conversations about parenting, homeschooling, and life | Podcast</title>
+			<title>{`${episodeTitle} - Raising Our Future`}</title>
 			<meta content="width=device-width, initial-scale=1" name="viewport" />
 			<meta
 				name="description"

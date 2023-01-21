@@ -1,15 +1,15 @@
 import './globals.css';
 
-import { Inter } from '@next/font/google';
+import { Open_Sans } from '@next/font/google';
 
-const inter = Inter({
-	variable: '--font-inter',
+const openSans = Open_Sans({
+	variable: '--font-open-sans',
 	display: 'optional',
 });
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
-		<html lang="en" className={`${inter.variable}`}>
+		<html lang="en" className={`${openSans.variable}`}>
 			<head />
 			<body>{children}</body>
 		</html>

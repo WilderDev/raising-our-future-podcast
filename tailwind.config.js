@@ -7,7 +7,7 @@ module.exports = {
 	theme: {
 		extend: {
 			fontFamily: {
-				sans: ['var(--font-inter)', ...fontFamily.sans],
+				sans: ['var(--font-open-sans)', ...fontFamily.sans],
 			},
 		},
 	},
@@ -15,6 +15,7 @@ module.exports = {
 		require('@tailwindcss/forms'),
 		require('@tailwindcss/line-clamp'),
 		require('prettier-plugin-tailwindcss'),
+		require('@tailwindcss/typography'),
 		plugin(({ addVariant }) => addVariant('hocus', ['&:hover', '&:focus'])),
 	],
 };
