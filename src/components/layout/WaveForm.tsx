@@ -55,3 +55,5 @@ export default function WaveForm({ ...props }) {
 		</svg>
 	);
 }
+
+// TSK: Change Colors to brand

@@ -20,7 +20,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 				<Sidebar />
 
 				{/* Main Content */}
-				<main className="lg:ml-112 xl:ml-120 border-t border-slate-200 lg:relative lg:mb-28 lg:border-t-0">
+				<main className="border-t border-slate-200 lg:relative lg:ml-112 lg:mb-28 lg:border-t-0 xl:ml-120">
 					<WaveForm className="absolute left-0 top-0 h-20 w-full" />
 
 					<div className="relative">{children}</div>
@@ -30,7 +30,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 				<Footer />
 
 				{/* Audio Player */}
-				<section className="lg:left-112 xl:left-120 fixed inset-x-0 bottom-0 z-10">
+				<section className="fixed inset-x-0 bottom-0 z-10 lg:left-112 xl:left-120">
 					{/* <AudioPlayer /> */}
 				</section>
 			</body>

@@ -1,27 +1,10 @@
+import getEpisodes from '@/backend/getEpisodes';
 import Episode from '@/components/EpisodeItem';
 import Container from '@/components/layout/Container';
-import { IEpisode } from '@/types/episode';
 
-const episodes: IEpisode[] = [
-	{
-		id: '50cd85d991be869ba027a1cfb5d34c4a',
-		title: 'Episode 1: The Beginning',
-		description: 'The first episode of the podcast.',
-		publishedAt: '2021-01-01',
-		// podcastNum: 1,
-		// date: '2021-01-01',
-		// length: '00:00:00',
-		// url: 'https://anchor.fm/raisingourfuture/episodes/Episode-1-The-Beginning-eq0j0a',
-	},
-	{
-		id: '1f10e43368d68a985fb42c4181240df5',
-		title: 'Episode 2: The Next Beginning',
-		description: 'The second episode of the podcast.',
-		publishedAt: '2021-01-02',
-	},
-];
+export default async function LandingPage() {
+	const episodes = await getEpisodes();
 
-export default function LandingPage() {
 	return (
 		<div className="pt-16 pb-12 sm:pb-4 lg:pt-12">
 			<Container>
@@ -36,3 +19,5 @@ export default function LandingPage() {
 		</div>
 	);
 }
+
+// https://beta.nextjs.org/docs/data-fetching/fetching
