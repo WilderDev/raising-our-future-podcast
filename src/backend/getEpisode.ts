@@ -1,8 +1,9 @@
 import { IEpisode } from '@/types/episode';
 import baseUrl from '@/utils/baseUrl';
+import sluggify from '@/utils/sluggify';
 
-export default async function getEpisode(id: string) {
-	const res = await fetch(baseUrl + `/api/episodes/${id}`);
+export default async function getEpisode(title: string) {
+	const res = await fetch(baseUrl + `/api/episodes/${sluggify(title)}`, { next: { revalidate: 10 } });
 
 	if (!res.ok) {
 		throw new Error('Failed to fetch data');
@@ -43,7 +44,6 @@ export default async function getEpisode(id: string) {
 // 		props: {
 // 			episode,
 // 		},
-// 		revalidate: 10,
 // 	};
 // }
 

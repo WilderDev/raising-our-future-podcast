@@ -3,4 +3,9 @@ export interface IEpisode {
 	title: string;
 	description: string;
 	publishedAt: string;
+	content: string;
+	audio: {
+		src: string;
+		type: string;
+	};
 }

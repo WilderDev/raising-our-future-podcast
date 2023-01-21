@@ -12,3 +12,11 @@ export function formatHumanTime(seconds: number) {
 
 	return `${h} hour${h === 1 ? '' : 's'}, ${m} minute${m === 1 ? '' : 's'}, ${s} second${s === 1 ? '' : 's'}`;
 }
+
+export function formatSliderTime(seconds: number[], totalSeconds = seconds) {
+	let totalWithoutLeadingZeroes = totalSeconds.slice(totalSeconds.findIndex((x) => x !== 0));
+	return seconds
+		.slice(seconds.length - totalWithoutLeadingZeroes.length)
+		.map((x) => x.toString().padStart(2, '0'))
+		.join(':');
+}

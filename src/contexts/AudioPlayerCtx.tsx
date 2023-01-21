@@ -1,6 +1,8 @@
 'use client';
 
-import { createContext, useContext, useMemo, useReducer, useRef } from 'react';
+import { createContext, MutableRefObject, useContext, useMemo, useReducer, useRef } from 'react';
+
+import { IEpisode } from '@/types/episode';
 
 export interface IAudioPlayerCtx {
 	playing: boolean;
@@ -67,15 +69,28 @@ function audioPlayerReducer(state, action) {
 export function AudioPlayerCtxProvider({ children }: { children: React.ReactNode }) {
 	const [state, dispatch] = useReducer(audioPlayerReducer, defaultState);
 
-	const playerRef = useRef(null);
+	interface IPlayerRef
+		extends MutableRefObject<
+			| HTMLAudioElement & {
+					currentTime: number;
+					playbackRate: number;
+					play(): Promise<void>;
+					pause(): Promise<void>;
+			  }
+		> {
+		currentTime: number;
+	}
+
+	// @ts-ignore
+	const playerRef: IPlayerRef = useRef(null);
 
 	const actions = useMemo(() => {
 		return {
-			play(data) {
+			play(data: any) {
 				if (data) {
 					dispatch({ type: 'SET_META', payload: data });
 
-					if (playerRef?.current?.currentSrc !== data.audio.src) {
+					if (playerRef.current && playerRef.current.currentSrc !== data.audio.src) {
 						let playbackRate = playerRef.current.playbackRate;
 
 						playerRef.current.src = data.audio.src;
@@ -91,22 +106,22 @@ export function AudioPlayerCtxProvider({ children }: { children: React.ReactNode
 			pause() {
 				playerRef.current.pause();
 			},
-			toggle(data) {
+			toggle(data: any) {
 				this.isPlaying(data) ? actions.pause() : actions.play(data);
 			},
-			seekBy(amount) {
+			seekBy(amount: number) {
 				playerRef.current.currentTime += amount;
 			},
-			seek(time) {
+			seek(time: number) {
 				playerRef.current.currentTime = time;
 			},
-			playbackRate(rate) {
+			playbackRate(rate: number) {
 				playerRef.current.playbackRate = rate;
 			},
 			toggleMute() {
 				dispatch({ type: 'TOGGLE_MUTE' });
 			},
-			isPlaying(data) {
+			isPlaying(data: any) {
 				return data ? state.playing && playerRef.current.currentSrc === data.audio.src : state.playing;
 			},
 		};

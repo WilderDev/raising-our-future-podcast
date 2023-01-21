@@ -5,6 +5,7 @@ import { useMemo } from 'react';
 
 import { useAudioPlayer } from '@/contexts/AudioPlayerCtx';
 import { IEpisode } from '@/types/episode';
+import sluggify from '@/utils/sluggify';
 
 import { DateTime } from './DateTime';
 import PlayPauseIcon from './icons/PlayPauseIcon';
@@ -24,7 +25,9 @@ export default function EpisodeItem({ episode }: IProps) {
 			<Container>
 				<div className="flex flex-col items-start">
 					<h2 id={`episode-${episode.id}-title`} className="mt-2 text-lg font-bold text-slate-900">
-						<Link href={`/${episode.id}`}>{episode.title}</Link>
+						<Link href={`/episode/${sluggify(episode.title)}`}>
+							{episode.id}: {episode.title}
+						</Link>
 					</h2>
 
 					<DateTime
@@ -53,7 +56,7 @@ export default function EpisodeItem({ episode }: IProps) {
 						</span>
 
 						<Link
-							href={`/${episode.id}`}
+							href={`/episode/${sluggify(episode.title)}`}
 							className="flex items-center text-sm font-bold leading-6 text-emerald-500 hover:text-emerald-700 active:text-emerald-900"
 							aria-label={`Show notes for episode ${episode.title}`}
 						>

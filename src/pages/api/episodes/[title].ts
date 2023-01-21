@@ -2,6 +2,9 @@ import { promises as fs } from 'fs';
 import { NextApiRequest, NextApiResponse } from 'next';
 import path from 'path';
 
+import { IEpisode } from '@/types/episode';
+import sluggify from '@/utils/sluggify';
+
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 	//   const response = await fetch("https://api.spreaker.com/v2/shows/4134456/episodes");
 	//   const data = await response.json();
@@ -28,18 +31,20 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 		published: string;
 	}
 
-	const transformedData = data.map(({ id, title, description, content, enclosures, published }: IRes) => ({
-		id: id.toString(),
-		title: title,
-		description: description,
-		publishedAt: published,
-		content: content,
-		url: `https://their-side-feed.vercel.app/episode-00${id}.mp3`,
-		audio: enclosures.map((enclosure) => ({
+	const episode = data.find(({ title }: IRes) => sluggify(title) === req.query.title);
+
+	const transformedEpisode = {
+		id: episode.id.toString(),
+		title: episode.title,
+		description: episode.description,
+		publishedAt: episode.published,
+		content: episode.content,
+		url: `https://their-side-feed.vercel.app/episode-00${episode.id}.mp3`,
+		audio: episode.enclosures.map((enclosure: any) => ({
 			src: enclosure.url,
 			type: enclosure.type,
 		}))[0],
-	}));
+	};
 
-	return res.status(200).json(transformedData);
+	return res.status(200).json(transformedEpisode);
 }

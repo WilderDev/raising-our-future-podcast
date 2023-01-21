@@ -11,6 +11,7 @@ import MuteBtn from './MuteBtn';
 import PlaybackRateBtn from './PlaybackRateBtn';
 import PlayBtn from './PlayBtn';
 import RewindBtn from './RewindBtn';
+import Slider from './Slider';
 
 export default function AudioPlayer() {
 	let player = useAudioPlayer(null);
@@ -52,14 +53,16 @@ export default function AudioPlayer() {
 						<ForwardBtn player={player} />
 					</div>
 
-					{/* <Slider
+					<Slider
 						label="Current time"
 						maxValue={player.duration}
 						step={1}
 						value={[currentTime ?? player.currentTime]}
-						// onChange={([v]) => setCurrentTime(v)}
+						onChange={([v]: any) => {
+							setCurrentTime(v);
+						}}
 						onChangeEnd={(value: number) => {
-							// player.seek(value);
+							player.seek(value);
 
 							if (wasPlayingRef.current) {
 								player.play();
@@ -68,9 +71,9 @@ export default function AudioPlayer() {
 						numberFormatter={{ format: formatHumanTime }}
 						onChangeStart={() => {
 							wasPlayingRef.current = player.playing;
-							// player.pause();
+							player.pause();
 						}}
-					/> */}
+					/>
 
 					<div className="flex items-center gap-4">
 						<div className="flex items-center">
