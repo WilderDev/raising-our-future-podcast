@@ -16,21 +16,38 @@ export default function About({ ...props }) {
 				<span className="ml-2.5">About</span>
 			</h2>
 
-			<p className={cn('mt-2 text-base leading-7 text-slate-700', !isExpanded && 'lg:line-clamp-4')}>
-				In this show, Eric and Wes dig deep to get to the facts with guests who have been labeled villains by a
-				society quick to judge, without actually getting the full story. Tune in every Thursday to get to the
-				truth with another misunderstood outcast as they share the missing context in their tragic tale.
+			<p className={cn('mt-2 space-y-4 text-base leading-7 text-slate-700', !isExpanded && 'lg:line-clamp-3')}>
+				<div className="block">
+					Welcome to &quot;Raising Our Future,&quot; a podcast hosted by two parents who are passionate about
+					homeschooling, raising children, and life.
+				</div>
+				<span className="block">
+					Our goal is to provide valuable insights and inspiration to parents who are navigating the
+					challenges of homeschooling and raising children in today&apos;s world.
+				</span>
+				<span className="block">
+					Each episode, we will share our personal experiences and perspectives on a variety of topics, from
+					homeschooling curriculum and methods, to discipline and behavior, to the joys and struggles of
+					raising children. We will also feature interviews with experts and other parents who have valuable
+					insights to share.
+				</span>
+				<span className="block">
+					Our mission is to empower parents with the knowledge, tools, and inspiration they need to raise
+					confident, capable, and resilient children. We believe that by working together and sharing our
+					experiences, we can build a better future for our children and for the world.
+				</span>
+				<span className="block">
+					We invite you to join us on this journey and be a part of the conversation. Thank you for listening!
+				</span>
 			</p>
 
-			{!isExpanded && (
-				<button
-					type="button"
-					className="mt-2 hidden text-sm font-bold leading-6 text-emerald-500 hover:text-emerald-700 active:text-emerald-900 lg:inline-block"
-					onClick={() => setIsExpanded(true)}
-				>
-					Show more
-				</button>
-			)}
+			<button
+				type="button"
+				className="mt-2 hidden text-sm font-bold leading-6 text-emerald-500 hover:text-emerald-700 active:text-emerald-900 lg:inline-block"
+				onClick={() => setIsExpanded(!isExpanded)}
+			>
+				{isExpanded ? 'Show Less' : 'Show More'}
+			</button>
 		</section>
 	);
 }

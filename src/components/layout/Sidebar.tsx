@@ -36,10 +36,10 @@ const socialIcons: {
 
 export default function Sidebar() {
 	return (
-		<header className="lg:w-112 xl:w-120 bg-slate-50 lg:fixed lg:inset-y-0 lg:left-0 lg:flex lg:items-start lg:overflow-y-auto">
+		<header className="bg-slate-50 lg:fixed lg:inset-y-0 lg:left-0 lg:flex lg:w-112 lg:items-start lg:overflow-y-auto xl:w-120">
 			<div className="hidden lg:sticky lg:top-0 lg:flex lg:w-16 lg:flex-none lg:items-center lg:whitespace-nowrap lg:py-12 lg:text-sm lg:leading-7 lg:[writing-mode:vertical-rl]">
 				<span className="font-mono text-slate-500">Hosted by</span>
-				<span className="mt-6 flex gap-6 font-bold text-slate-900">
+				<span className="mt-6 flex gap-6 font-semibold text-slate-900">
 					{hosts.map((host, hostIndex) => (
 						<Fragment key={host}>
 							{hostIndex !== 0 && (
@@ -60,7 +60,6 @@ export default function Sidebar() {
 					aria-label="Homepage"
 				>
 					<Image
-						// TSK: Responsive
 						className="w-full"
 						src={podcastAlbumCover}
 						alt=""
@@ -72,10 +71,10 @@ export default function Sidebar() {
 
 				<div className="mt-10 text-center lg:mt-12 lg:text-left">
 					<p className="text-xl font-bold text-slate-900">
-						<Link href="/">Their Side</Link>
+						<Link href="/">Raising Our Future</Link>
 					</p>
 					<p className="mt-3 text-lg font-medium leading-8 text-slate-700">
-						Conversations with the most tragically misunderstood people of our time.
+						Building a strong foundation for tomorrow&apos;s champions
 					</p>
 				</div>
 
