@@ -2,8 +2,6 @@
 
 import { createContext, MutableRefObject, useContext, useMemo, useReducer, useRef } from 'react';
 
-import { IEpisode } from '@/types/episode';
-
 export interface IAudioPlayerCtx {
 	playing: boolean;
 	muted: boolean;
@@ -41,7 +39,11 @@ const defaultState = {
 
 const AudioPlayerCtx = createContext<IAudioPlayerCtx>(defaultState);
 
-const reducers = {
+type reducerTypes = 'SET_META' | 'PLAY' | 'PAUSE' | 'TOGGLE_MUTE' | 'SET_CURRENT_TIME' | 'SET_DURATION';
+
+const reducers: {
+	[key in reducerTypes]: (state: typeof defaultState, action: any) => any;
+} = {
 	SET_META(state, action) {
 		return { ...state, meta: action.payload };
 	},
@@ -57,12 +59,12 @@ const reducers = {
 	SET_CURRENT_TIME(state, action) {
 		return { ...state, currentTime: action.payload };
 	},
-	SET_DURATION(state, action) {
+	SET_DURATION(state: any, action) {
 		return { ...state, duration: action.payload };
 	},
 };
 
-function audioPlayerReducer(state, action) {
+function audioPlayerReducer(state: any, action: any) {
 	return reducers[action.type as keyof typeof reducers](state, action);
 }
 
@@ -137,16 +139,16 @@ export function AudioPlayerCtxProvider({ children }: { children: React.ReactNode
 				ref={playerRef}
 				onPlay={() => dispatch({ type: 'PLAY' })}
 				onPause={() => dispatch({ type: 'PAUSE' })}
-				onTimeUpdate={(event) => {
+				onTimeUpdate={() => {
 					dispatch({
 						type: 'SET_CURRENT_TIME',
-						payload: Math.floor(event.target.currentTime),
+						payload: Math.floor(playerRef.current.currentTime),
 					});
 				}}
-				onDurationChange={(event) => {
+				onDurationChange={() => {
 					dispatch({
 						type: 'SET_DURATION',
-						payload: Math.floor(event.target.duration),
+						payload: Math.floor(playerRef.current.duration),
 					});
 				}}
 				muted={state.muted}

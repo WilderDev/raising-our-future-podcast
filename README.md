@@ -9,3 +9,5 @@
 -   TSK: Error Page
 -   TSK: 404 Page
 -   TSK: Loading Page
+-   TSK: TSK Messages
+-   TSK: Logo / Favicon
