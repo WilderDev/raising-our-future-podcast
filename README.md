@@ -4,11 +4,9 @@
 
 ## TODO
 
--   TSK: Dynamic Episode Title in Head
+-   TSK: Dynamic Episode Description in Head
 -   TSK: NotFound Page
--   TSK: Error Page
--   TSK: 404 Page
--   TSK: Loading Page
+-   TSK: Error Pages
+-   TSK: Loading Page / Section
 -   TSK: TSK Messages
 -   TSK: Logo / Favicon
--   TSK: Vercel URL for fetching (Prisma?)

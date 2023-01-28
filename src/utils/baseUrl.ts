@@ -1,16 +1,12 @@
 function getBaseUrl() {
-	// If prod
-	if (process.env.NODE_ENV === 'production') {
-		// return 'https://www.example.com';
-	}
+	// browser should use relative path
+	if (typeof window !== 'undefined') return '';
 
-	// If server
-	if (typeof window === 'undefined') {
-		// return 'http://ingress-nginx-controller.ingress-nginx.svc.cluster.local';
-	}
+	// reference for vercel.com
+	if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
 
-	// If dev
-	return 'http://localhost:3000';
+	// assume localhost
+	return `http://localhost:${process.env.PORT ?? 3000}`;
 }
 
 export default getBaseUrl();
