@@ -2,14 +2,20 @@ import { IEpisode } from '@/types/episode';
 import baseUrl from '@/utils/baseUrl';
 import sluggify from '@/utils/sluggify';
 
-export default async function getEpisode(title: string) {
-	const res = await fetch(baseUrl + `/api/episodes/${sluggify(title)}`, { next: { revalidate: 10 } });
+export default async function getEpisode(slug: string) {
+	const res = await fetch(
+		baseUrl + `/api/episodes/${slug}`,
+		{ cache: 'no-store' }
+		// { next: { revalidate: 10 } } // TSK
+	);
 
 	if (!res.ok) {
 		throw new Error('Failed to fetch data');
 	}
 
 	const episode: IEpisode = await res.json();
+
+	console.log('episode:', episode);
 
 	return episode;
 }

@@ -20,12 +20,15 @@ export default function EpisodeItem({ episode }: IProps) {
 
 	const player = useAudioPlayer(audioPlayerData);
 
+	console.log('episode IN EPISODE ITEM:', episode);
+	console.log('episode.publishedAt:', episode.publishedAt);
+
 	return (
 		<article aria-labelledby={`episode-${episode.id}-title`} className="py-10 sm:py-12">
 			<Container>
 				<div className="flex flex-col items-start">
 					<h2 id={`episode-${episode.id}-title`} className="mt-2 text-lg font-bold text-slate-900">
-						<Link href={`/episode/${sluggify(episode.title)}`}>
+						<Link href={`/episode/${episode.slug}`}>
 							{episode.id}: {episode.title}
 						</Link>
 					</h2>
@@ -56,7 +59,7 @@ export default function EpisodeItem({ episode }: IProps) {
 						</span>
 
 						<Link
-							href={`/episode/${sluggify(episode.title)}`}
+							href={`/episode/${episode.slug}`}
 							className="flex items-center text-sm font-bold leading-6 text-emerald-500 hover:text-emerald-700 active:text-emerald-900"
 							aria-label={`Show notes for episode ${episode.title}`}
 						>

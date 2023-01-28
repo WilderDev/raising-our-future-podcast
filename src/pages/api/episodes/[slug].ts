@@ -1,16 +1,17 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import sluggify from '@/utils/sluggify';
-
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 	// const response = await fetch('https://api.spreaker.com/v2/shows/4134456/episodes');
 	// const data = await response.json();
+
+	console.log('req.query.slug:', req.query.slug);
 
 	const data = [
 		{
 			id: 1,
 			title: 'The Beginning',
 			description: 'The first episode of the podcast.',
+			slug: 'the-beginning',
 			published: '2021-01-01',
 			content: 'This is the first episode of the podcast.',
 			enclosures: [
@@ -24,6 +25,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 			id: 2,
 			title: 'The Next Beginning',
 			description: 'The second episode of the podcast.',
+			slug: 'the-next-beginning',
 			published: '2021-01-02',
 			content: 'This is the second episode of the podcast.',
 			enclosures: [
@@ -33,7 +35,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 				},
 			],
 		},
-	].filter(({ title }) => sluggify(title) === req.query.title)[0];
+	].filter(({ slug }) => slug === req.query.slug)[0];
+
+	console.log('data:', data);
 
 	// const dataDir = path.join(process.cwd(), 'data');
 
@@ -49,6 +53,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 		id: number;
 		title: string;
 		description: string;
+		slug: string; // tSK
 		content: string;
 		enclosures: {
 			url: string;
@@ -64,6 +69,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 		id: episode.id.toString(),
 		title: episode.title,
 		description: episode.description,
+		slug: episode.slug,
 		publishedAt: episode.published,
 		content: episode.content,
 		url: `https://their-side-feed.vercel.app/episode-00${episode.id}.mp3`,

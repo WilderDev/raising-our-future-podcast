@@ -17,6 +17,9 @@ export default function EpisodePageContent({ episode }: IProps) {
 
 	let player = useAudioPlayer(audioPlayerData);
 
+	console.log('episode IN PAGE CONTENT:', episode);
+	console.log('episode.publishedAt:', episode.publishedAt);
+
 	return (
 		<article className="py-16 lg:py-36">
 			<Container>

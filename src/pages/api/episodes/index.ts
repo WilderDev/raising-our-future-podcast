@@ -12,6 +12,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 			id: 1,
 			title: 'The Beginning',
 			description: 'The first episode of the podcast.',
+			slug: 'the-beginning',
 			published: '2021-01-01',
 			content: 'This is the first episode of the podcast.',
 			enclosures: [
@@ -25,6 +26,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 			id: 2,
 			title: 'The Next Beginning',
 			description: 'The second episode of the podcast.',
+			slug: 'the-next-beginning',
 			published: '2021-01-02',
 			content: 'This is the second episode of the podcast.',
 			enclosures: [
@@ -50,6 +52,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 		id: number;
 		title: string;
 		description: string;
+		slug: string; // tSK
 		content: string;
 		enclosures: {
 			url: string;
@@ -58,10 +61,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 		published: string;
 	}
 
-	const transformedData = data?.map(({ id, title, description, content, enclosures, published }: IRes) => ({
+	const transformedData = data?.map(({ id, title, description, slug, content, enclosures, published }: IRes) => ({
 		id: id.toString(),
 		title: title,
 		description: description,
+		slug: slug,
 		publishedAt: published,
 		content: content,
 		url: `https://their-side-feed.vercel.app/episode-00${id}.mp3`,

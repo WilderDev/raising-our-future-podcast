@@ -1,12 +1,12 @@
 interface IProps {
-	params: { title: string };
+	params: { slug: string };
 }
 
 // https://beta.nextjs.org/docs/api-reference/file-conventions/head
 
 export default function EpisodeHead({ params }: IProps) {
 	const episode = {
-		title: params.title.split('-').join(' ').toUpperCase(),
+		title: params.slug.split('-').join(' ').toUpperCase(),
 		description: 'An episode of Raising Our Future', // TSK
 	};
 
