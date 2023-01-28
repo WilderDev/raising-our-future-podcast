@@ -20,9 +20,6 @@ export default function EpisodeItem({ episode }: IProps) {
 
 	const player = useAudioPlayer(audioPlayerData);
 
-	console.log('episode IN EPISODE ITEM:', episode);
-	console.log('episode.publishedAt:', episode.publishedAt);
-
 	return (
 		<article aria-labelledby={`episode-${episode.id}-title`} className="py-10 sm:py-12">
 			<Container>

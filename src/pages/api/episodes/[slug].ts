@@ -4,8 +4,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 	// const response = await fetch('https://api.spreaker.com/v2/shows/4134456/episodes');
 	// const data = await response.json();
 
-	console.log('req.query.slug:', req.query.slug);
-
 	const data = [
 		{
 			id: 1,
@@ -36,8 +34,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 			],
 		},
 	].filter(({ slug }) => slug === req.query.slug)[0];
-
-	console.log('data:', data);
 
 	// const dataDir = path.join(process.cwd(), 'data');
 
